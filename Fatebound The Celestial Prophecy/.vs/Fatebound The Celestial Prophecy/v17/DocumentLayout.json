@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\OneDrive\\Desktop\\Op\u0163ional_Unity\\",
+  "WorkspaceRootPath": "D:\\OneDrive\\Desktop\\Op\u0163ional_Unity\\Fatebound The Celestial Prophecy\\",
   "Documents": [],
   "DocumentGroupContainers": [
     {
@@ -50,6 +50,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }
