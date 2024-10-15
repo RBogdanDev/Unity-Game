@@ -11,12 +11,6 @@
 *.log
 *.stacktrace
 
-# Ignore meta files outside Assets directory
-!/[Aa]ssets/**/*.meta
-
 # Ignore packages directory
 /[Pp]ackages/manifest.json
 /[Pp]ackages/packages-lock.json
-
-# Ignore Unity's auto-generated UserSettings
-/[Uu]serSettings/
