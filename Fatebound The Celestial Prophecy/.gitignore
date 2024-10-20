@@ -14,3 +14,4 @@
 # Ignore packages directory
 /[Pp]ackages/manifest.json
 /[Pp]ackages/packages-lock.json
+/.vs
