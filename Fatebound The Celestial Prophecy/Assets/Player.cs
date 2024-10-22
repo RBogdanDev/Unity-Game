@@ -8,8 +8,12 @@ public class Player : MonoBehaviour
     public float movspeed;
     float speed_x, speed_y;
     Rigidbody2D rb;
-    UnsignedIntegerField level;
-    float health;
+    public float Level, currentXP, maximumXP;
+    public float health, maximumHealth;
+
+    //Liniile astea 2 le adaugam cand o sa avem quest-uri
+    //int XPAmount = 10;
+    //XPManager.Instance.AddXP(XPAmount);
 
     // Start is called before the first frame update
     void Start()
@@ -24,4 +28,30 @@ public class Player : MonoBehaviour
         speed_y = Input.GetAxis("Vertical") * movspeed;
         rb.velocity = new Vector2(speed_x, speed_y);
     }
+
+    private void onEnable(){
+        //Subscribe event
+        XPManager.Instance.onXPChange += HandleXPChange;
+    }
+
+    private void onDisable(){
+        //Unsubscribe event
+        XPManager.Instance.onXPChange -= HandleXPChange;
+    }
+
+    private void HandleXPChange(int newXP){
+        currentXP += newXP;
+        if(currentXP >= maximumXP){
+            LevelUp();
+        }
+    }
+
+    private void LevelUp(){
+        maximumHealth += 10;
+        health = maximumHealth;
+        maximumXP += 50;
+        currentXP = 0;
+        Level += 1;
+    }
+
 }
