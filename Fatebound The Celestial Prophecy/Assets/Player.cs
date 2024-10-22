@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     public float movspeed;
     float speed_x, speed_y;
     Rigidbody2D rb;
-    int Level, currentXP, maximumXP, maximumHealth;
-    float health;
+    int Level, currentXP, maximumXP;
+    float health, maximumHealth;
 
     //Liniile astea 2 le adaugam cand o sa avem quest-uri
     //int XPAmount = 10;
