@@ -5,26 +5,56 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    public float movspeed = 5f;
+    public float movespeed = 5f;
     Rigidbody2D rb;
-    UnsignedIntegerField level;
-    float health;
+    int Level, currentXP, maximumXP;
+    float health, maximumHealth;
 
-    //se apeleaza la inceput
+    //Liniile astea 2 le adaugam cand o sa avem quest-uri
+    //int XPAmount = 10;
+    //XPManager.Instance.AddXP(XPAmount);
+
+    // Start is called before the first frame update
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    //aici update ul e fc la fiecare frame
+
+    // Update is called once per frame
+
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
-        Vector2 movement = new Vector2(horizontal, vertical);
-        movement *= movspeed;  // Înmulțim direcția cu viteza
-
+        Vector2 movement = new Vector2 (horizontal, vertical) * movespeed;
         rb.velocity = movement;
     }
 
+    private void onEnable(){
+        //Subscribe event
+        XPManager.Instance.onXPChange += HandleXPChange;
+    }
+
+    private void onDisable(){
+        //Unsubscribe event
+        XPManager.Instance.onXPChange -= HandleXPChange;
+    }
+
+    private void HandleXPChange(int newXP){
+        currentXP += newXP;
+        if(currentXP >= maximumXP){
+            LevelUp();
+        }
+    }
+
+    private void LevelUp(){
+        maximumHealth += 20;
+        health = maximumHealth;
+        maximumXP += 200;
+        currentXP = 0;
+        Level += 1;
+    }
+
 }
+
