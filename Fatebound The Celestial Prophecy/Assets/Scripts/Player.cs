@@ -15,12 +15,14 @@ public class Player : MonoBehaviour
     //XPManager.Instance.AddXP(XPAmount);
 
     // Start is called before the first frame update
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
+
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -55,3 +57,4 @@ public class Player : MonoBehaviour
     }
 
 }
+
