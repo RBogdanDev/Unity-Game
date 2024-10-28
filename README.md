@@ -69,3 +69,12 @@ Jocul este structurat pe **10 niveluri**, fiecare crescând în dificultate și 
 2. **Folosește abilitățile unice** ale fiecărui personaj pentru a înfrunta inamicii în mod strategic.
 3. **Colectează monede** din inamici, butoaie și cutii pentru a-ți îmbunătăți echipamentul.
 4. **Completează obiectivul nivelului** și apără satul de toate amenințările.
+
+
+---
+
+## **Feedback**
+
+Feedback-ul ne dorim sa il primim la urmatoarele adrese de email:
+
+iacobvictor@rocketmail.com  sau  victor-gabriel.iacob@s.unibuc.ro
