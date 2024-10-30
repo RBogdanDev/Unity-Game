@@ -2,53 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
+using System;
 
 public class Player : MonoBehaviour
 {
-    public float movespeed = 5f;
-    Rigidbody2D rb;
-    int Level, currentXP, maximumXP;
-    float health, maximumHealth;
+    public float movespeed = 5;
+    private Rigidbody2D rb;
+    private int Level, currentXP, maximumXP;
+    private float health, maximumHealth;
+    public UnityEngine.UI.Image healthBar;
+    public string DamageType;
 
-    //Liniile astea 2 le adaugam cand o sa avem quest-uri
-    //int XPAmount = 10;
-    //XPManager.Instance.AddXP(XPAmount);
-
-    // Start is called before the first frame update
+    public float Health => health;
+    public float MaximumHealth => maximumHealth;
+    //public string DT => DamageType;
 
     void Start()
     {
+        maximumHealth = 100;
+        health = maximumHealth;
         rb = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
 
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        Vector2 movement = new Vector2 (horizontal, vertical) * movespeed;
+        Vector2 movement = new Vector2(horizontal, vertical) * movespeed;
         rb.velocity = movement;
+
+        healthBar.fillAmount = Mathf.Clamp(Health / MaximumHealth, 0, 1);
+        
+        if (health > maximumHealth)
+        {
+            health = maximumHealth;
+        }
+        
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    private void onEnable(){
-        //Subscribe event
+    private void OnEnable()
+    {
         XPManager.Instance.onXPChange += HandleXPChange;
     }
 
-    private void onDisable(){
-        //Unsubscribe event
+    private void OnDisable()
+    {
         XPManager.Instance.onXPChange -= HandleXPChange;
     }
 
-    private void HandleXPChange(int newXP){
+    private void HandleXPChange(int newXP)
+    {
         currentXP += newXP;
-        if(currentXP >= maximumXP){
+        if (currentXP >= maximumXP)
+        {
             LevelUp();
         }
     }
 
-    private void LevelUp(){
+    private void LevelUp()
+    {
         maximumHealth += 20;
         health = maximumHealth;
         maximumXP += 200;
@@ -56,5 +73,8 @@ public class Player : MonoBehaviour
         Level += 1;
     }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+    }
 }
-
