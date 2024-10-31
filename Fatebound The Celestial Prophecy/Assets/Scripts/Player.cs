@@ -30,10 +30,7 @@ public class Player : MonoBehaviour, IDamageable
         Vector2 movement = new Vector2(horizontal, vertical) * movespeed;
         rb.velocity = movement;
         
-        if (health > maximumHealth)
-        {
-            health = maximumHealth;
-        }
+        health = Mathf.Clamp(health, 0, maximumHealth);
     }
 
     private void OnEnable()
