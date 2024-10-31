@@ -1,30 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+// Damage.cs
 using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    public Player pDamage;
-    public Enemy eDamage;
+    public DamageType damageType = DamageType.None;
+    public DamageEffect damageEffect = DamageEffect.None;
+    public float damageAmount = 20;
 
-    public void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
+        if (damageable != null)
         {
-            //Aici ar trebui sa pun ceva de genul if(DamageType.CompareTag( "Melee"/"Projectile"/"Magic")) si dupa sa verific de care damage Melee sau celelalte este.
-            //Exemplu: Daca pDamage.DT == "Magic" atunci mai fac un if in care verific tipul de magie, gen "fire", "ice", etc.
-            if(pDamage.DamageType == "Meele"){
-                pDamage.TakeDamage(20);
-            }
-            //pDamage.TakeDamage(20);
+            damageable.TakeDamage(damageAmount);
+            ApplyEffect(damageable);
+        }
+    }
 
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
-        {
-            if(eDamage.DamageType == "Meele"){
-                eDamage.TakeDamage(20);
-            }
-            //eDamage.TakeDamage(20);
-        }
+    private void ApplyEffect(IDamageable target)
+    {
+        //Logica pentru aplicarea efectului specific, ex: `Stagger`, `Burn` etc.
     }
 }

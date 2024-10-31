@@ -5,18 +5,16 @@ using UnityEngine.UIElements;
 using UnityEngine.UI;
 using System;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     public float movespeed = 5;
     private Rigidbody2D rb;
     private int Level, currentXP, maximumXP;
     private float health, maximumHealth;
     public UnityEngine.UI.Image healthBar;
-    public string DamageType;
 
     public float Health => health;
     public float MaximumHealth => maximumHealth;
-    //public string DT => DamageType;
 
     void Start()
     {
@@ -31,17 +29,10 @@ public class Player : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(horizontal, vertical) * movespeed;
         rb.velocity = movement;
-
-        healthBar.fillAmount = Mathf.Clamp(Health / MaximumHealth, 0, 1);
         
         if (health > maximumHealth)
         {
             health = maximumHealth;
-        }
-        
-        if (health <= 0)
-        {
-            Destroy(gameObject);
         }
     }
 
@@ -76,5 +67,10 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+        healthBar.fillAmount = Mathf.Clamp(Health / MaximumHealth, 0, 1);
     }
 }

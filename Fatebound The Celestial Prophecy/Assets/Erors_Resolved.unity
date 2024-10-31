@@ -253,7 +253,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movespeed: 5
   healthBar: {fileID: 1922125631}
-  DamageType: Meele
 --- !u!114 &592127366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,8 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdf05999d7fb9f318d166b2bf9534e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pDamage: {fileID: 0}
-  eDamage: {fileID: 854221573}
+  damageAmount: 20
 --- !u!1 &854221567
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,8 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdf05999d7fb9f318d166b2bf9534e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pDamage: {fileID: 592127365}
-  eDamage: {fileID: 0}
+  damageAmount: 20
 --- !u!114 &854221573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,7 +501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339a4ea220fd05f5998595315fc42399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageType: Meele
 --- !u!1 &1554079112
 GameObject:
   m_ObjectHideFlags: 0
