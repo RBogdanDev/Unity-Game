@@ -1,4 +1,4 @@
-<Project ToolsVersion="Current">
+﻿<Project ToolsVersion="Current">
   <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
   <PropertyGroup>
     <BaseIntermediateOutputPath>Temp/obj/$(Configuration)/$(MSBuildProjectName)</BaseIntermediateOutputPath>
@@ -64,8 +64,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Spring_Arm.cs" />
-    <Compile Include="Assets/Player.cs" />
+    <Compile Include="Assets/DamageType.cs" />
+    <Compile Include="Assets/Scripts/NinjaController.cs" />
+    <Compile Include="Assets/Enemy.cs" />
+    <Compile Include="Assets/DamageEffect.cs" />
     <Compile Include="Assets/XPManager.cs" />
+    <Compile Include="Assets/IDamageable.cs" />
+    <Compile Include="Assets/Scripts/Player.cs" />
+    <Compile Include="Assets/DamageEnum.cs" />
+    <Compile Include="Assets/Damage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets/Ninja Files/Read Me.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
