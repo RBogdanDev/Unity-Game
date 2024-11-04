@@ -7,7 +7,7 @@ using System;
 
 public class Player : MonoBehaviour, IDamageable
 {
-    public float movespeed = 5;
+    private float movespeed = 5;
     private Rigidbody2D rb;
     private int Level, currentXP, maximumXP;
     private float health, maximumHealth;
@@ -15,6 +15,12 @@ public class Player : MonoBehaviour, IDamageable
 
     public float Health => health;
     public float MaximumHealth => maximumHealth;
+
+    private DamageInfo attackMelee = new DamageInfo(20, Type.Melee, Response.Stagger, true);
+    private bool isIntterupteble = true;
+
+    public Transform AttackPoint;
+    public float AttackRange = 0.5f;
 
     void Start()
     {
@@ -29,8 +35,44 @@ public class Player : MonoBehaviour, IDamageable
         float vertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(horizontal, vertical) * movespeed;
         rb.velocity = movement;
-        
-        health = Mathf.Clamp(health, 0, maximumHealth);
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Attack(attackMelee);
+        }
+    }
+
+    private void Attack(DamageInfo attack)
+    {
+        //aici avem un trigger pentru animaþii (poþi sã mai adaugi ºi tu pentru arc ºi magie)
+        //animator.SetTrigger("Attack");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            if(enemy.gameObject == this.gameObject)
+            {
+                continue;
+            }
+
+            IDamageable damageable = enemy.GetComponent<IDamageable>();
+            Debug.Log("Hit on Enemy");
+            if (damageable != null)
+            {
+                damageable.TakeDamage(attack);
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (AttackPoint == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(AttackPoint.position, AttackRange);
     }
 
     private void OnEnable()
@@ -61,13 +103,24 @@ public class Player : MonoBehaviour, IDamageable
         Level += 1;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(DamageInfo damage)
     {
-        health -= damage;
-        if (health <= 0)
+        health = Mathf.Clamp(health - damage.Amount, 0, health);
+
+        if (health == 0)
         {
             Destroy(gameObject);
         }
         healthBar.fillAmount = Mathf.Clamp(Health / MaximumHealth, 0, 1);
+
+        if (damage.Intterupts && isIntterupteble)
+        {
+            ApplyEffect(damage.Effect);
+        }
+    }
+
+    private void ApplyEffect(Response effect)
+    {
+        //Logica pentru aplicarea efectului specific, ex: `Stagger`, `Burn` etc.
     }
 }
