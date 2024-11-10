@@ -194,6 +194,7 @@ public class Player : MonoBehaviour, IDamageable
                     {
                         Debug.Log(effect);
                         health = Mathf.Clamp(health - damage, 0, health);
+                        healthBar.fillAmount = Mathf.Clamp(Health / MaximumHealth, 0, 1);
                     }
 
                     yield return new WaitForSeconds(1f);
@@ -214,6 +215,7 @@ public class Player : MonoBehaviour, IDamageable
                     {
                         Debug.Log(effect);
                         health = Mathf.Clamp(health - damage * (1 / duration), 0, health);
+                        healthBar.fillAmount = Mathf.Clamp(Health / MaximumHealth, 0, 1);
                     }
 
                     yield return new WaitForSeconds(duration);
