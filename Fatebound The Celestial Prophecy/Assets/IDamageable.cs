@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void TakeDamage(DamageInfo damage);
+    void TakeDamage(DamageInfo damage, Vector2 attackVector);
 }
 
