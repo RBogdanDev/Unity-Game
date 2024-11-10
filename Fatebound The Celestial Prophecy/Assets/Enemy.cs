@@ -106,7 +106,6 @@ public class Enemy : MonoBehaviour, IDamageable
                 Vector2 knockBackDirection = ((Vector2)transform.position - attackVector).normalized;
                 rb.AddForce(knockBackDirection * damage.EffectDamage, ForceMode2D.Impulse);
                 StartCoroutine(StopKnockBack(knockBackDirection * damage.EffectDamage, damage.EffectDuration)); // Opreste KnockBack-ul dupa un timp
-                IsStaggered = false;
                 Debug.Log("KnockBack");
             }
         }
@@ -142,7 +141,6 @@ public class Enemy : MonoBehaviour, IDamageable
                 }
                 else
                 {
-
                     if (effect == Response.Stagger || effect == Response.Stun)
                     {
                         if (!IsStaggered)
