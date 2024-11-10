@@ -134,7 +134,7 @@ public class Enemy : MonoBehaviour, IDamageable
                     else
                     {
                         Debug.Log(effect);
-                        health = Mathf.Clamp(health - damage * (1 / duration), 0, health);
+                        health = Mathf.Clamp(health - damage, 0, health);
                     }
 
                     yield return new WaitForSeconds(1f);
