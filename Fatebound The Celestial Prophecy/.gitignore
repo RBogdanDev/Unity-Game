@@ -15,3 +15,4 @@
 /[Pp]ackages/manifest.json
 /[Pp]ackages/packages-lock.json
 /.vs
+/.vscode
