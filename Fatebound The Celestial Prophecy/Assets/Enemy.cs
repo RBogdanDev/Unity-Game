@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float AttackRange = 0.5f;
 
     private bool IsStaggered = false;
+    public EnemyAI enemyAI;
     private List<CancellationTokenSource> effectTokens = new List<CancellationTokenSource>();
 
     // Start is called before the first frame update
@@ -28,6 +29,8 @@ public class Enemy : MonoBehaviour, IDamageable
         health = maximumHealth;
 
         rb = GetComponent<Rigidbody2D>();
+
+        enemyAI = GetComponent<EnemyAI>();
 
         StartCoroutine(CallFunctionAfterDelay());
     }
@@ -84,6 +87,16 @@ public class Enemy : MonoBehaviour, IDamageable
         effectTokens.Add(cts);
 
         health = Mathf.Clamp(health - damage.Amount, 0, health);
+
+        if (enemyAI != null)
+        {
+            Debug.Log("Calling ForceAggressive on EnemyAI from TakeDamage");
+            enemyAI.ForceAggressive();
+        }
+        else
+        {
+            Debug.LogWarning("enemyAI reference is null in Enemy.cs!");
+        }
 
         if (health == 0)
         {
