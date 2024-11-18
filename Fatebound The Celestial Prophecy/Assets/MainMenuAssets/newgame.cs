@@ -20,6 +20,6 @@ public class newgame : MonoBehaviour
     public void NewGame()
     {
         Debug.Log("New Game");
-        SceneManager.LoadScene("Test_Map");
+        SceneManager.LoadScene("First_Level");
     }
 }
