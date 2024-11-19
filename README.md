@@ -12,7 +12,8 @@ Un joc RPG 2D cu vedere de sus (_Top Down View_), unde intri în rolul eroilor c
 - [Protagoniștii](#protagonistii)
 - [Colectarea Resurselor și Îmbunătățirea Echipamentului](#colectarea-resurselor-si-imbunatatirea-echipamentului)
 - [Niveluri și Dificultate](#niveluri-si-dificultate)
-- [Cum Să Joci](#cum-sa-joci)
+- [Cum Să Joci](#cum-sa-joci
+- [Feedback](#feedback)
 
 ---
 
@@ -77,3 +78,5 @@ Jocul este structurat pe **10 niveluri**, fiecare crescând în dificultate și 
 Feedback-ul ne dorim sa il primim la urmatoarele adrese de email:
 
 iacobvictor@rocketmail.com  sau  victor-gabriel.iacob@s.unibuc.ro
+
+Pentru a descarca jocul trebuie sa aveti extensia de Github LFS, deoarece sunt fisiere destul de mari.
