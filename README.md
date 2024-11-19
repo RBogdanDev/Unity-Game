@@ -77,3 +77,5 @@ Jocul este structurat pe **10 niveluri**, fiecare crescând în dificultate și 
 Feedback-ul ne dorim sa il primim la urmatoarele adrese de email:
 
 iacobvictor@rocketmail.com  sau  victor-gabriel.iacob@s.unibuc.ro
+
+Pentru a descarca jocul trebuie sa aveti extensia de Github LFS, deoarece sunt fisiere destul de mari.
