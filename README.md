@@ -12,7 +12,7 @@ Un joc RPG 2D cu vedere de sus (_Top Down View_), unde intri în rolul eroilor c
 - [Protagoniștii](#protagonistii)
 - [Colectarea Resurselor și Îmbunătățirea Echipamentului](#colectarea-resurselor-si-imbunatatirea-echipamentului)
 - [Niveluri și Dificultate](#niveluri-si-dificultate)
-- [Cum Să Joci](#cum-sa-joci
+- [Cum Să Joci](#cum-sa-joci)
 - [Feedback](#feedback)
 
 ---
