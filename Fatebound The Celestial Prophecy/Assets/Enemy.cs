@@ -6,17 +6,19 @@ using System.Threading;
 public class Enemy : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
-
+    private AudioSource audioSource;
+    public AudioClip attackClip, deadClip;
+    private Animator animator;
     private float health, maximumHealth;
 
     public float Health => health;
     public float MaximumHealth => maximumHealth;
 
-    private DamageInfo defaultAttack = new DamageInfo(15, Type.Melee, Response.Stagger, 0.2f, 0f, true);
+    private DamageInfo defaultAttack = new DamageInfo(10, Type.Melee, Response.Stagger, 0.2f, 0f, true);
     private bool isIntterupteble = true;
 
     public Transform AttackPoint;
-    public float AttackRange = 0.5f;
+    public float AttackRange = 5.0f;
 
     private bool IsStaggered = false;
     public EnemyAI enemyAI;
@@ -25,7 +27,9 @@ public class Enemy : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        maximumHealth = 40;
+        maximumHealth = 100;
+        animator=GetComponent<Animator>();
+        audioSource=GetComponent<AudioSource>();
         health = maximumHealth;
 
         rb = GetComponent<Rigidbody2D>();
@@ -66,6 +70,8 @@ public class Enemy : MonoBehaviour, IDamageable
             Debug.Log("Hit on Player");
             if (damageable != null)
             {
+
+                animator.SetTrigger("jumpAttack");
                 damageable.TakeDamage(attack, AttackPoint.transform.position);
             }
         }
@@ -98,11 +104,11 @@ public class Enemy : MonoBehaviour, IDamageable
             Debug.LogWarning("enemyAI reference is null in Enemy.cs!");
         }
 
-        if (health == 0)
+        if (health <= 0)
         {
-            Destroy(gameObject);
+            animator.Play("Die_spike");
         }
-
+        animator.SetTrigger("isHurt");
         // Verificam daca damage-ul primit de la inamic este unul care poate fi intrerupt
         if (damage.Intterupts && isIntterupteble)
         {
@@ -173,15 +179,19 @@ public class Enemy : MonoBehaviour, IDamageable
                 }
             }
 
-            if (health == 0)
+            if (health <= 0)
             {
-                Destroy(gameObject);
+                animator.Play("Die_spike");
             }
             else if (IsStaggered)
             {
                 IsStaggered = false;
             }
         }
+    }
+    public void DestroyAfterAnimation()
+    {
+        Destroy(gameObject);
     }
 
     private void StopAllEffects()
@@ -200,5 +210,13 @@ public class Enemy : MonoBehaviour, IDamageable
         rb.AddForce(-force, ForceMode2D.Impulse); // Aplicam o forta in directia opusa pentru a opri KnockBack-ul
         rb.velocity = Vector2.zero; // Oprim miscarea
         IsStaggered = false; // Oprim efectul de knockback
+    }
+    public void PlayAttackSoundEnemy()
+    {
+        audioSource.PlayOneShot(attackClip);
+    }
+    public void PlayDeadSound()
+    {
+        audioSource.PlayOneShot(deadClip);
     }
 }

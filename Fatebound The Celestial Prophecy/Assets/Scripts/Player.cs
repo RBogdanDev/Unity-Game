@@ -9,6 +9,9 @@ using System.Threading;
 public class Player : MonoBehaviour, IDamageable
 {
     private float movespeed = 5;
+    private AudioSource audioSource;
+    public AudioClip deadClip;
+    private Animator animator;
     private Rigidbody2D rb;
     private int Level, currentXP, maximumXP;
     private float health, maximumHealth;
@@ -19,15 +22,15 @@ public class Player : MonoBehaviour, IDamageable
 
     private DamageInfo[] attacks = new DamageInfo[]
     {
-        new DamageInfo(20, Type.Melee, Response.KnockBack, 0.2f, 10f, true),
+        new DamageInfo(10, Type.Melee, Response.KnockBack, 0.2f, 10f, true),
         new DamageInfo(1, Type.Melee, Response.Stun, 3f, 0f, true),
-        new DamageInfo(15, Type.Melee, Response.Bleed, 5f, 1.5f, true)
+        new DamageInfo(50, Type.Melee, Response.Bleed, 5f, 1.5f, true)
     };
     private DamageInfo selectedAttack;
     private bool isIntterupteble = true;
 
     public Transform AttackPoint;
-    public float AttackRange = 0.5f;
+    public float AttackRange = 5.0f;
 
     private bool IsStaggered = false;
     private List<CancellationTokenSource> effectTokens = new List<CancellationTokenSource>();
@@ -37,6 +40,8 @@ public class Player : MonoBehaviour, IDamageable
         maximumHealth = 100;
         health = maximumHealth;
         rb = GetComponent<Rigidbody2D>();
+        animator=GetComponent<Animator>();
+        audioSource=GetComponent<AudioSource>();
         selectedAttack = attacks[0];
     }
 
@@ -77,7 +82,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Attack(DamageInfo attack)
     {
-        //aici avem un trigger pentru animaþii (poþi sã mai adaugi ºi tu pentru arc ºi magie)
+        //aici avem un trigger pentru animaÃ¾ii (poÃ¾i sÃ£ mai adaugi Âºi tu pentru arc Âºi magie)
         //animator.SetTrigger("Attack");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange);
@@ -109,14 +114,24 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     private void OnEnable()
+{
+    if (XPManager.Instance != null)
     {
         XPManager.Instance.onXPChange += HandleXPChange;
     }
+    else
+    {
+        Debug.LogError("XPManager.Instance is null. Ensure it is initialized before enabling this script.");
+    }
+}
 
-    private void OnDisable()
+private void OnDisable()
+{
+    if (XPManager.Instance != null)
     {
         XPManager.Instance.onXPChange -= HandleXPChange;
     }
+}
 
     private void HandleXPChange(int newXP)
     {
@@ -145,10 +160,12 @@ public class Player : MonoBehaviour, IDamageable
 
         if (health == 0)
         {
-            Destroy(gameObject);
+            animator.SetTrigger("isDead");
         }
+
         healthBar.fillAmount = Mathf.Clamp(Health / MaximumHealth, 0, 1);
 
+        animator.SetTrigger("isHurt");//activam animatia de hurt
         // Verificam daca damage-ul primit de la inamic este unul care poate fi intrerupt
         if (damage.Intterupts && isIntterupteble)
         {
@@ -169,6 +186,10 @@ public class Player : MonoBehaviour, IDamageable
             }
         }
     }
+public void DestroyAfterAnimation()
+{
+    Destroy(gameObject);
+}
 
     private IEnumerator ApplyEffect(Response effect, float duration, float damage, CancellationToken token)
     {
@@ -223,7 +244,7 @@ public class Player : MonoBehaviour, IDamageable
 
             if (health == 0)
             {
-                Destroy(gameObject);
+                animator.SetTrigger("isDead");
             }
             else if (IsStaggered)
             {
@@ -248,5 +269,9 @@ public class Player : MonoBehaviour, IDamageable
         rb.AddForce(-force, ForceMode2D.Impulse); // Aplicam o forta in directia opusa pentru a opri KnockBack-ul
         rb.velocity = Vector2.zero; // Oprim miscarea
         IsStaggered = false; // Oprim efectul de knockback
+    }
+    public void PlayDeadAnimation()
+    {
+        audioSource.PlayOneShot(deadClip);
     }
 }
