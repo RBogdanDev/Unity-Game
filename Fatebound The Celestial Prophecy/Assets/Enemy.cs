@@ -9,13 +9,25 @@ public class Enemy : MonoBehaviour, IDamageable
     private AudioSource audioSource;
     public AudioClip attackClip, deadClip;
     private Animator animator;
-    private float health, maximumHealth;
+    private float health;
+    public float maximumHealth = 100;
 
     public float Health => health;
     public float MaximumHealth => maximumHealth;
 
-    private DamageInfo defaultAttack = new DamageInfo(10, Type.Melee, Response.Stagger, 0.2f, 0f, true);
-    private bool isIntterupteble = true;
+    private DamageInfo definedAttack; //= new DamageInfo(10, Type.Melee, Response.Stagger, 0.2f, 0f, true);
+    [Space(10)]
+    [Header("Attack-ul inamicului:")]
+    public float amount = 10;
+    public Type type = Type.Melee;
+    public Response effect = Response.Stagger;
+    public float duration = 0.2f;
+    public float damage = 10;
+    public bool interrupts = false;
+
+    [Space(10)]
+    [Header("Alte Atribute:")]
+    public bool isInterruptible = true;
 
     public Transform AttackPoint;
     public float AttackRange = 5.0f;
@@ -27,8 +39,9 @@ public class Enemy : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        maximumHealth = 100;
-        animator=GetComponent<Animator>();
+        definedAttack = new DamageInfo(amount, type, effect, duration, damage, interrupts);
+
+        animator =GetComponent<Animator>();
         audioSource=GetComponent<AudioSource>();
         health = maximumHealth;
 
@@ -50,7 +63,7 @@ public class Enemy : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(2f);
             if (!IsStaggered)
             {
-                Attack(defaultAttack);
+                Attack(definedAttack);
             }
         }
     }
@@ -110,7 +123,7 @@ public class Enemy : MonoBehaviour, IDamageable
         }
         animator.SetTrigger("isHurt");
         // Verificam daca damage-ul primit de la inamic este unul care poate fi intrerupt
-        if (damage.Intterupts && isIntterupteble)
+        if (damage.Interrupts || isInterruptible)
         {
             if (damage.Effect != Response.KnockBack)
             {
