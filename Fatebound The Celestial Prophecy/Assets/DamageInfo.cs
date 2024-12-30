@@ -9,7 +9,7 @@ public struct DamageInfo
     public Response Effect { get; private set; }
     public float EffectDuration { get; private set; }
     public float EffectDamage { get; private set; }
-    public bool Intterupts { get; private set; }
+    public bool Interrupts { get; private set; }
 
     public DamageInfo(float amount, Type type, Response effect, float duration, float damage, bool interrupts)
     {
@@ -18,7 +18,7 @@ public struct DamageInfo
         Effect = effect;
         EffectDuration = duration;
         EffectDamage = damage;
-        Intterupts = interrupts;
+        Interrupts = interrupts;
     }
 
     public void Update(float amount, float duration, float damage)
