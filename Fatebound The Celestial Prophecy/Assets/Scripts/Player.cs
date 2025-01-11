@@ -27,7 +27,7 @@ public class Player : MonoBehaviour, IDamageable
         new DamageInfo(50, Type.Melee, Response.Bleed, 5f, 1.5f, true)
     };
     private DamageInfo selectedAttack;
-    private bool isIntterupteble = true;
+    private bool isInterruptible = true;
 
     public Transform AttackPoint;
     public float AttackRange = 5.0f;
@@ -167,7 +167,7 @@ private void OnDisable()
 
         animator.SetTrigger("isHurt");//activam animatia de hurt
         // Verificam daca damage-ul primit de la inamic este unul care poate fi intrerupt
-        if (damage.Intterupts && isIntterupteble)
+        if (damage.Interrupts || isInterruptible)
         {
             if (damage.Effect != Response.KnockBack)
             {
