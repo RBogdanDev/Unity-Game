@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private DamageInfo[] attacks = new DamageInfo[]
     {
-        new DamageInfo(10, Type.Melee, Response.KnockBack, 0.2f, 10f, true),
+        new DamageInfo(10, Type.Melee, Response.KnockBack, 0.2f, 450f, true),
         new DamageInfo(1, Type.Melee, Response.Stun, 3f, 0f, true),
         new DamageInfo(50, Type.Melee, Response.Bleed, 5f, 1.5f, true)
     };
