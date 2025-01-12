@@ -9,8 +9,9 @@ public class EnemyAI : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip walkClip;
     private Animator animator;
-    private float movement = 4, deptofview = 4, distance;
+    private float movement = 4, deptofview, distance;
     private bool aggressive = false;
+    private Enemy enemytype;
 
     public void ForceAggressive()
     {
@@ -22,6 +23,30 @@ public class EnemyAI : MonoBehaviour
         animator=GetComponent<Animator>();
         animator.Play("idle");
         audioSource=GetComponent<AudioSource>();
+
+        enemytype = GetComponent<Enemy>();
+        if (enemytype != null)
+        {
+            // Setăm deptofview pe baza tipului de inamic
+            switch (enemytype.type)
+            {
+                case Type.Melee:
+                    deptofview = 4;
+                    break;
+                case Type.Projectile:
+                    deptofview = 10;
+                    break;
+                case Type.Magic:
+                    deptofview = 8;
+                    break;
+                default:
+                    deptofview = 4;
+                    break;
+            }
+        }
+        else{
+            deptofview = 4;
+        }
     }
 
     // Update is called once per frame

@@ -13,7 +13,7 @@ public class Player : MonoBehaviour, IDamageable
     public AudioClip deadClip;
     private Animator animator;
     private Rigidbody2D rb;
-    private int Level, currentXP, maximumXP;
+    public int Level, currentXP, maximumXP;
     private float health, maximumHealth;
     public UnityEngine.UI.Image healthBar;
 
@@ -43,6 +43,10 @@ public class Player : MonoBehaviour, IDamageable
         animator=GetComponent<Animator>();
         audioSource=GetComponent<AudioSource>();
         selectedAttack = attacks[0];
+
+        Level = 1;
+        currentXP = 0;
+        maximumXP = 100;
     }
 
     void Update()
@@ -82,7 +86,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Attack(DamageInfo attack)
     {
-        //aici avem un trigger pentru animaþii (poþi sã mai adaugi ºi tu pentru arc ºi magie)
+        //aici avem un trigger pentru animatii (poþi sã mai adaugi si tu pentru arc si magie)
         //animator.SetTrigger("Attack");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange);
@@ -146,8 +150,8 @@ private void OnDisable()
     {
         maximumHealth += 20;
         health = maximumHealth;
-        maximumXP += 200;
-        currentXP = 0;
+        currentXP = currentXP - maximumXP;
+        maximumXP += 100;
         Level += 1;
     }
 
@@ -208,6 +212,7 @@ public void DestroyAfterAnimation()
                         {
                             Debug.Log("Stuned");
                             IsStaggered = true;
+                            animator.Play("Specialhurt_spike");
                         }
                     }
                     else
