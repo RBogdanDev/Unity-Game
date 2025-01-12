@@ -12,6 +12,9 @@ public class Enemy : MonoBehaviour, IDamageable
     private float health;
     public float maximumHealth = 100;
 
+    public bool isBossFight; 
+    private bool isDead = false;
+
     public float Health => health;
     public float MaximumHealth => maximumHealth;
 
@@ -36,8 +39,12 @@ public class Enemy : MonoBehaviour, IDamageable
     public EnemyAI enemyAI;
     private List<CancellationTokenSource> effectTokens = new List<CancellationTokenSource>();
 
+
+    //xp-ul primit pentru distrugerea inamicului
+    public int xpAmount = 100;
+
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         definedAttack = new DamageInfo(amount, type, effect, duration, damage, interrupts);
 
@@ -53,7 +60,7 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
     // Update is called once per frame
-    void Update() {}
+    protected void Update() {}
 
     // Pentru a apela o functia de atac dupa un delay
     IEnumerator CallFunctionAfterDelay()
@@ -119,7 +126,15 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if (health <= 0)
         {
-            animator.Play("Die_spike");
+            if(isBossFight == true && isDead == false){
+                maximumHealth += 100;
+                health = maximumHealth;
+                isDead = true;
+                Debug.Log("It ain't over 'till I say it's over");
+            }
+            else{
+                animator.Play("Die_spike");
+            }
         }
         animator.SetTrigger("isHurt");
         // Verificam daca damage-ul primit de la inamic este unul care poate fi intrerupt
@@ -130,7 +145,7 @@ public class Enemy : MonoBehaviour, IDamageable
                 // Daca nu este un KnockBack, aplicam efectul in paralel cu celelalte (daca exista)
                 StartCoroutine(ApplyEffect(damage.Effect, damage.EffectDuration, damage.EffectDamage, cts.Token));
             }
-            else
+            else if(isBossFight == false)
             {
                 // Daca este un KnockBack, oprim toate efectele in desfasurare si aplicam KnockBack-ul
                 StopAllEffects();
@@ -160,6 +175,7 @@ public class Enemy : MonoBehaviour, IDamageable
                         {
                             Debug.Log("Stuned");
                             IsStaggered = true;
+                            animator.Play("Specialhurt_spike");
                         }
                     }
                     else
@@ -203,8 +219,10 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
     public void DestroyAfterAnimation()
-    {
+    {   
         Destroy(gameObject);
+        XPManager.Instance.AddXP(xpAmount);
+        
     }
 
     private void StopAllEffects()
