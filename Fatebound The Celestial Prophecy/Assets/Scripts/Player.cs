@@ -10,10 +10,13 @@ public class Player : MonoBehaviour, IDamageable
 {
     public int coins = 200;
     public OpenWShop openWShop;
+    public CloseShop closeShop;
     public OpenInv openInv;
     public CloseInv closeInv;
     public bool seDeschide = false;
     public bool isInvOpen = false;
+    public bool seDeschideShop = false;
+    public bool isShopOpen = false;
     private string shoptag = "None";
     private float movespeed = 5;
     private AudioSource audioSource;
@@ -58,11 +61,10 @@ public class Player : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (shoptag != "None" && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && shoptag == "Weapons")
         {
             openWShop.OpenWShopPanel();
         }
-
         if (Input.GetKeyDown(KeyCode.I) && !seDeschide)
         {
             StartCoroutine(ToggleInventory());
