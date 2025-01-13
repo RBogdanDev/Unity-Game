@@ -29,6 +29,7 @@ public class Player : MonoBehaviour, IDamageable
     public int Level, currentXP, maximumXP;
     private float health, maximumHealth;
     public UnityEngine.UI.Image healthBar;
+    public GameObject inventoryExamplePrefab;
 
     public float Health => health;
     public float MaximumHealth => maximumHealth;
@@ -50,10 +51,7 @@ public class Player : MonoBehaviour, IDamageable
 
     void Start()
     {
-        if (loadfile != null)
-        {
-            loadfile.LoadInventory();
-        }
+        WaitToLoad();
         maximumHealth = 100;
         health = maximumHealth;
         rb = GetComponent<Rigidbody2D>();
@@ -337,5 +335,11 @@ public void DestroyAfterAnimation()
         health = maximumHealth;
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<UnityEngine.UI.Image>();
         healthBar.fillAmount = 1;
+    }
+    IEnumerator WaitToLoad()
+    {
+        SaveInventorySystem saveSystem = inventoryExamplePrefab.GetComponent<SaveInventorySystem>();
+        yield return new WaitForSeconds(0.5f);
+        saveSystem.LoadInventory();
     }
 }

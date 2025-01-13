@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class Lvl2ToDungeon : MonoBehaviour
 {
     public Player player;
+    public GameObject inv;
     private void OnTriggerEnter2D(Collider2D other)
     {
+        SaveInventorySystem saveSystem = inv.GetComponent<SaveInventorySystem>();
+
         if (other.CompareTag("Player")) 
         {
-            FindObjectOfType<SaveInventorySystem>().SaveInventory();
+            saveSystem.SaveInventory();
             SceneManager.LoadScene("Dungeon");
         }
     }
