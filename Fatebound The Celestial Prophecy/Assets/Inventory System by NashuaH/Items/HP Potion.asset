@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5b728530c479d843803971ca11c5f55, type: 3}
-  m_Name: Blue Herb
+  m_Name: HP Potion
   m_EditorClassIdentifier: 
-  itemName: Blue Herb
-  ID: 1
-  price: 2
+  itemName: HP
+  price: 20
   Stackable: 1
-  itemIcon: {fileID: 21300000, guid: 339a01af7e4e2fe4ea21882c0918eea3, type: 3}
+  itemIcon: {fileID: 21300000, guid: e52ea25af699fd445b7046374f81a5b9, type: 3}
   type: 1

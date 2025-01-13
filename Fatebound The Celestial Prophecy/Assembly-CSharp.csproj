@@ -71,13 +71,14 @@
     <Compile Include="Assets\Inventory System by NashuaH\Scripts\AddRandomItemToInventory.cs" />
     <Compile Include="Assets\Scripts\CloseInv.cs" />
     <Compile Include="Assets\BossProjectileScript.cs" />
+    <Compile Include="Assets\Scripts\Lvl2ToDungeon.cs" />
     <Compile Include="Assets\Scripts\OpenInv.cs" />
     <Compile Include="Assets\Inventory System by NashuaH\Scripts\DataScripts\SaveInventorySystem.cs" />
     <Compile Include="Assets\XPManager.cs" />
-    <Compile Include="Assets\Inventory System by NashuaH\Scripts\EditorScripts\InventoryEditor.cs" />
     <Compile Include="Assets\Inventory System by NashuaH\Scripts\ItemInfoUpdate.cs" />
     <Compile Include="Assets\IDamageable.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\DungeonToBoss.cs" />
     <Compile Include="Assets\Inventory System by NashuaH\Scripts\ItemScripts\Item.cs" />
     <Compile Include="Assets\Inventory System by NashuaH\Scripts\ItemScripts\Resource.cs" />
     <Compile Include="Assets\Inventory System by NashuaH\Scripts\ItemScripts\Consumable.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\Inventory System by NashuaH\Scripts\ItemScripts\Weapon.cs" />
     <Compile Include="Assets\MainMenuAssets\quitgamebutton.cs" />
     <Compile Include="Assets\Scripts\Shop\WeaponShop\WeaponCollision.cs" />
+    <Compile Include="Assets\Scripts\Shop\PotionShop\PotionCollider.cs" />
     <Compile Include="Assets\Scripts\UIInventoryItem.cs" />
   </ItemGroup>
   <ItemGroup>

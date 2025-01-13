@@ -3,15 +3,15 @@
 public class Resource : Item
 {
     public resourceType type;
+    public Player player;
 
     public override void Use()
     {
-        base.Use();
-
-        //Use Resource
-
-        //Use the following line if you want to destroy this type of item after use
-        // Inventory.instance.RemoveItem(this, 1);
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        player = playerObject.GetComponent<Player>();
+        player.Heal();
+        Inventory.instance.RemoveItem(this, 1);
+        Debug.Log($"{name} used and removed from inventory.");
     }
 
     public enum resourceType { Food, HP, MP }
