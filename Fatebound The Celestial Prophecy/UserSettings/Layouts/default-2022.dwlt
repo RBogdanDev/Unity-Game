@@ -102,7 +102,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 48
+  controlID: 39
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 47
+  controlID: 38
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -248,8 +248,8 @@ MonoBehaviour:
     y: 0
     width: 1244
     height: 514
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -458,7 +458,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -466,17 +466,17 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Eu\Desktop\gigga\Unity-Game\Fatebound The Celestial
+  m_LastProjectPath: C:\Users\Eu\Desktop\wigga\Unity-Game\Fatebound The Celestial
     Prophecy
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 144}
-    m_SelectedIDs: d2410000
-    m_LastClickedID: 16850
-    m_ExpandedIDs: 000000000e4100006a4100004a420000b6420000de4200006201010000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 0e410000
+    m_LastClickedID: 16654
+    m_ExpandedIDs: 000000000e4100006a4100004a42000056420000ba420000e64200008243000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -644,9 +644,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 52460100
-      m_LastClickedID: 83538
-      m_ExpandedIDs: e0bbfdff0abffdff12c2fdff90c5fdffa2c8fdff7ac9fdff16cffdffced5fdff5adefdff5420feff5c20feff6820feff6c20feff7220feffe220feffea20feffc221feffc421feff6825feffc633feff9834feffd835feff5437feff9208010066460100
+      m_SelectedIDs: d2370100
+      m_LastClickedID: 79826
+      m_ExpandedIDs: aceefdff8afbfdff6c01feffc41efefffc1efeffae26feffc62bfeff4c2efeff1232feff9233fefff60b01006c240100b0290100a8380100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1039,9 +1039,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -7.2542386, y: -4.0421004, z: -0.12895626}
+    m_Target: {x: -5.145643, y: 11.417102, z: -0.26916465}
     speed: 2
-    m_Value: {x: -6.8667393, y: -4.1434603, z: -0.13314526}
+    m_Value: {x: -6.5864778, y: 11.181377, z: -0.25679567}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1077,7 +1077,7 @@ MonoBehaviour:
       m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
-        m_Target: 0
+        m_Target: 1
         speed: 2
         m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
@@ -1091,9 +1091,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 8.889858
+    m_Target: 28.723394
     speed: 2
-    m_Value: 9.308752
+    m_Value: 27.486502
   m_Ortho:
     m_Target: 1
     speed: 2
