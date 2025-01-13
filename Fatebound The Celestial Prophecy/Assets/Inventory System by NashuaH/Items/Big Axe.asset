@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Big Axe
   m_EditorClassIdentifier: 
   itemName: Big Axe
-  ID: 0
-  price: 30
+  price: 20
   Stackable: 0
-  itemIcon: {fileID: 21300000, guid: a3cf4ea4778921841be31a51c3d71b94, type: 3}
+  itemIcon: {fileID: 21300000, guid: 6812f82be4d0e0746a45a7bde1e6c816, type: 3}
   type: 1
-  weaponDamage: 5
+  weaponDamage: 200
