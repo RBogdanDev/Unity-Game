@@ -8,6 +8,7 @@ using System.Threading;
 
 public class Player : MonoBehaviour, IDamageable
 {
+    public SaveInventorySystem loadfile;
     public int coins = 200;
     public OpenWShop openWShop;
     public CloseShop closeShop;
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour, IDamageable
     public bool isInvOpen = false;
     public bool seDeschideShop = false;
     public bool isShopOpen = false;
+    public bool potionShop = false;
+    public Item potiuneref;
     private string shoptag = "None";
     private float movespeed = 5;
     private AudioSource audioSource;
@@ -47,6 +50,10 @@ public class Player : MonoBehaviour, IDamageable
 
     void Start()
     {
+        if (loadfile != null)
+        {
+            loadfile.LoadInventory();
+        }
         maximumHealth = 100;
         health = maximumHealth;
         rb = GetComponent<Rigidbody2D>();
@@ -73,7 +80,11 @@ public class Player : MonoBehaviour, IDamageable
         {
             return;
         }
-
+        if (Input.GetKeyDown(KeyCode.B) && potionShop)
+        {
+            coins -= 20;
+            Inventory.instance.AddItem(potiuneref, 1);
+        }
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(horizontal, vertical) * movespeed;
@@ -321,4 +332,10 @@ public void DestroyAfterAnimation()
             yield return new WaitForSeconds(0.2f);  
             seDeschide = false;  
         }
+    public void Heal()
+    {
+        health = maximumHealth;
+        healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<UnityEngine.UI.Image>();
+        healthBar.fillAmount = 1;
+    }
 }

@@ -8,10 +8,19 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 4f10f58ac408560468af348502f558eb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test_Map.unity
     guid: 4c28d2deb68803343a1fe72687b99936
+  - enabled: 1
+    path: Assets/Scenes/Second_Level.unity
+    guid: 12bdd37d1bedcc643a88cafc66c6f79e
+  - enabled: 1
+    path: Assets/Scenes/Dungeon.unity
+    guid: b326f3dd3de509d4285e354d32f4f372
+  - enabled: 1
+    path: Assets/Scenes/Final_Boss.unity
+    guid: 023ed3cebb7baa449840d2a477664a82
   m_configObjects: {}
