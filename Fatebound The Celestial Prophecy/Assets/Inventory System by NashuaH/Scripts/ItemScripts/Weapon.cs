@@ -18,5 +18,5 @@ public class Weapon : Item
         // Inventory.instance.RemoveItem(this, 1);
     }
 
-    public enum weaponType { Sword, Axe, Spear}
+    public enum weaponType { Sword, Axe, Shield}
 }

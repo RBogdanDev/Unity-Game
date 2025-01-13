@@ -8,6 +8,13 @@ using System.Threading;
 
 public class Player : MonoBehaviour, IDamageable
 {
+    public int coins = 200;
+    public OpenWShop openWShop;
+    public OpenInv openInv;
+    public CloseInv closeInv;
+    public bool seDeschide = false;
+    public bool isInvOpen = false;
+    private string shoptag = "None";
     private float movespeed = 5;
     private AudioSource audioSource;
     public AudioClip deadClip;
@@ -51,6 +58,15 @@ public class Player : MonoBehaviour, IDamageable
 
     void Update()
     {
+        if (shoptag != "None" && Input.GetKeyDown(KeyCode.E))
+        {
+            openWShop.OpenWShopPanel();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I) && !seDeschide)
+        {
+            StartCoroutine(ToggleInventory());
+        }
         if (IsStaggered)
         {
             return;
@@ -279,4 +295,28 @@ public void DestroyAfterAnimation()
     {
         audioSource.PlayOneShot(deadClip);
     }
+    public void SetShopTag(string tag)
+    {
+        shoptag = tag;
+    }
+    IEnumerator ToggleInventory()
+        {
+            seDeschide = true;
+
+            if (isInvOpen)
+            {
+                Debug.Log("Inventory Closed");
+                closeInv.CloseInventory(); 
+                isInvOpen = false;
+            }
+            else
+            {
+                Debug.Log("Inventory Opened");
+                openInv.OpenInventory();  
+                isInvOpen = true;
+            }
+
+            yield return new WaitForSeconds(0.2f);  
+            seDeschide = false;  
+        }
 }
