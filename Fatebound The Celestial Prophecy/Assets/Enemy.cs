@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float health;
     public float maximumHealth = 100;
 
-    public bool isBossFight; 
+    public bool isBossFight;
     private bool isDead = false;
 
     public float Health => health;
@@ -48,8 +48,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         definedAttack = new DamageInfo(amount, type, effect, duration, damage, interrupts);
 
-        animator =GetComponent<Animator>();
-        audioSource=GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         health = maximumHealth;
 
         rb = GetComponent<Rigidbody2D>();
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
     // Update is called once per frame
-    protected void Update() {}
+    protected void Update() { }
 
     // Pentru a apela o functia de atac dupa un delay
     IEnumerator CallFunctionAfterDelay()
@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour, IDamageable
             if (damageable != null)
             {
 
-                animator.SetTrigger("skill_1");
+                animator.SetTrigger("jumpAttack");
                 damageable.TakeDamage(attack, AttackPoint.transform.position);
             }
         }
@@ -126,17 +126,18 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if (health <= 0)
         {
-            if(isBossFight == true && isDead == false){
-                maximumHealth += 100;
-                health = maximumHealth;
+            if (isBossFight == true && isDead == false)
+            {
+                health += maximumHealth;
                 isDead = true;
                 Debug.Log("It ain't over 'till I say it's over");
             }
-            else{
-                animator.Play("death");
+            else
+            {
+                animator.Play("Die_spike");
             }
         }
-        animator.SetTrigger("hit_1");
+        animator.SetTrigger("isHurt");
         // Verificam daca damage-ul primit de la inamic este unul care poate fi intrerupt
         if (damage.Interrupts || isInterruptible)
         {
@@ -145,7 +146,7 @@ public class Enemy : MonoBehaviour, IDamageable
                 // Daca nu este un KnockBack, aplicam efectul in paralel cu celelalte (daca exista)
                 StartCoroutine(ApplyEffect(damage.Effect, damage.EffectDuration, damage.EffectDamage, cts.Token));
             }
-            else if(isBossFight == false)
+            else if (isBossFight == false)
             {
                 // Daca este un KnockBack, oprim toate efectele in desfasurare si aplicam KnockBack-ul
                 StopAllEffects();
@@ -175,7 +176,7 @@ public class Enemy : MonoBehaviour, IDamageable
                         {
                             Debug.Log("Stuned");
                             IsStaggered = true;
-                            animator.Play("hit_2");
+                            animator.Play("isHurt");
                         }
                     }
                     else
@@ -210,7 +211,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
             if (health <= 0)
             {
-                animator.Play("death");
+                animator.Play("Die_spike");
             }
             else if (IsStaggered)
             {
@@ -219,10 +220,10 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
     public void DestroyAfterAnimation()
-    {   
+    {
         Destroy(gameObject);
         XPManager.Instance.AddXP(xpAmount);
-        
+
     }
 
     private void StopAllEffects()

@@ -35,11 +35,13 @@ public class Player : MonoBehaviour, IDamageable
     public float Health => health;
     public float MaximumHealth => maximumHealth;
     public UnityEngine.UI.Image XPBar;
-    public TMP_Text coinText, levelText;
+    public TMP_Text coinText, levelText, titleQuest, questObjective;
+
+    public Quest currentQuest;
 
     private DamageInfo[] attacks = new DamageInfo[]
     {
-        new DamageInfo(10, Type.Melee, Response.KnockBack, 0.2f, 450f, true),
+        new DamageInfo(10, Type.Melee, Response.KnockBack, 0.2f, 10f, true),
         new DamageInfo(1, Type.Melee, Response.Stun, 3f, 0f, true),
         new DamageInfo(50, Type.Melee, Response.Bleed, 5f, 1.5f, true)
     };
@@ -93,6 +95,25 @@ public class Player : MonoBehaviour, IDamageable
         Vector2 movement = new Vector2(horizontal, vertical) * movespeed;
         rb.velocity = movement;
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            GameObject[] questNPCs = GameObject.FindGameObjectsWithTag("Quest");
+
+            foreach (GameObject questNPC in questNPCs)
+            {
+                Give_Quest questGiver = questNPC.GetComponent<Give_Quest>();
+                if (questGiver != null)
+                {
+                    Quest quest = questGiver.get();
+                    if (quest != null)
+                    {
+                        currentQuest = quest;
+                        break;
+                    }
+                }
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Attack(selectedAttack);
@@ -133,7 +154,6 @@ public class Player : MonoBehaviour, IDamageable
             coinText = GameObject.Find("CurrentCoins_Text (TMP)").GetComponent<TMP_Text>();
         }
 
-
         if (coinText != null)
         {
             levelText.text = Level.ToString();
@@ -141,6 +161,58 @@ public class Player : MonoBehaviour, IDamageable
         else
         {
             levelText = GameObject.Find("CurrentLevel_Text (TMP)").GetComponent<TMP_Text>();
+        }
+
+        if (currentQuest != null)
+        {
+            if (currentQuest.objectives.Count == 0)
+            {
+                coins += currentQuest.questCoins;
+
+                currentQuest = null;
+
+                if (titleQuest != null)
+                {
+                    titleQuest.text = "";
+                }
+                else
+                {
+                    titleQuest = GameObject.Find("QuestTitle_Text (TMP)").GetComponent<TMP_Text>();
+                }
+
+                if (questObjective != null)
+                {
+                    questObjective.text = "";
+                }
+                else
+                {
+                    questObjective = GameObject.Find("QuestObjective_Text (TMP)").GetComponent<TMP_Text>();
+                }
+            }
+            else if (!currentQuest.start)
+            {
+                currentQuest.start = true;
+            }
+            else
+            {
+                if (titleQuest != null)
+                {
+                    titleQuest.text = currentQuest.title;
+                }
+                else
+                {
+                    titleQuest = GameObject.Find("QuestTitle_Text (TMP)").GetComponent<TMP_Text>();
+                }
+
+                if (questObjective != null)
+                {
+                    questObjective.text = "Objective:\n" + currentQuest.objectives[0];
+                }
+                else
+                {
+                    questObjective = GameObject.Find("QuestObjective_Text (TMP)").GetComponent<TMP_Text>();
+                }
+            }
         }
     }
 
