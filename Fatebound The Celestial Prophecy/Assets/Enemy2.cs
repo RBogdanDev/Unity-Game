@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy2 : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
     private AudioSource audioSource;
@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float AttackRange = 5.0f;
 
     private bool IsStaggered = false;
-    public EnemyAI enemyAI;
+    public EnemyAI2 enemyAI;
     private List<CancellationTokenSource> effectTokens = new List<CancellationTokenSource>();
 
 
@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         rb = GetComponent<Rigidbody2D>();
 
-        enemyAI = GetComponent<EnemyAI>();
+        enemyAI = GetComponent<EnemyAI2>();
 
         StartCoroutine(CallFunctionAfterDelay());
     }

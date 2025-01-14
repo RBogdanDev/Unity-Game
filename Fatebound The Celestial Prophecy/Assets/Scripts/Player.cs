@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 using UnityEngine.UI;
 using System;
 using System.Threading;
+using TMPro;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -33,6 +34,8 @@ public class Player : MonoBehaviour, IDamageable
 
     public float Health => health;
     public float MaximumHealth => maximumHealth;
+    public UnityEngine.UI.Image XPBar;
+    public TMP_Text coinText, levelText;
 
     private DamageInfo[] attacks = new DamageInfo[]
     {
@@ -59,9 +62,11 @@ public class Player : MonoBehaviour, IDamageable
         audioSource=GetComponent<AudioSource>();
         selectedAttack = attacks[0];
 
-        Level = 1;
-        currentXP = 0;
+        Level = 2;
+        currentXP = 30;
         maximumXP = 100;
+
+        
     }
 
     void Update()
@@ -108,6 +113,34 @@ public class Player : MonoBehaviour, IDamageable
         {
             selectedAttack = attacks[2];
             Debug.Log("Selected Bleed");
+        }
+
+        if (XPBar != null)
+        {
+            XPBar.fillAmount = Mathf.Clamp((float)currentXP / maximumXP, 0, 1);
+        }
+        else
+        {
+            XPBar = GameObject.Find("XPBar").GetComponent<UnityEngine.UI.Image>();
+        }
+
+        if (coinText != null)
+        {
+            coinText.text = "Coins: " + coins.ToString();
+        }
+        else
+        {
+            coinText = GameObject.Find("CurrentCoins_Text (TMP)").GetComponent<TMP_Text>();
+        }
+
+
+        if (coinText != null)
+        {
+            levelText.text = Level.ToString();
+        }
+        else
+        {
+            levelText = GameObject.Find("CurrentLevel_Text (TMP)").GetComponent<TMP_Text>();
         }
     }
 
@@ -167,7 +200,7 @@ private void OnDisable()
     private void HandleXPChange(int newXP)
     {
         currentXP += newXP;
-        if (currentXP >= maximumXP)
+        while (currentXP >= maximumXP)
         {
             LevelUp();
         }

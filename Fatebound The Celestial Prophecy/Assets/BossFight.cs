@@ -26,6 +26,11 @@ public class BossFight : Enemy
             // Activăm comportamente speciale
             ActivateRage();
         }
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+            XPManager.Instance.AddXP(xpAmount);
+        }
     }
 
     private void ActivateRage()

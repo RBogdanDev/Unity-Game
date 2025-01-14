@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private AudioSource audioSource;
     public AudioClip attackClip, deadClip;
     private Animator animator;
-    private float health;
+    public float health;
     public float maximumHealth = 100;
 
     public bool isBossFight; 

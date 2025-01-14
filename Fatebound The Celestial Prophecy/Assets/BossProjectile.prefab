@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff120c7df5e112f55b5f2f5f82487d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2267458032700983003, guid: df8bab10955b5032383def34a353da17, type: 3}
+  player: {fileID: 5454958214424313823, guid: c74461e9b8b04474881551b68087c0ff, type: 3}
   impactClip: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
   forceClip: {fileID: 8300000, guid: 21c4a490b24ba2045bc815f7626a40ef, type: 3}
   force: 7
