@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI2 : MonoBehaviour
 {
     public GameObject player;
     private AudioSource audioSource;
