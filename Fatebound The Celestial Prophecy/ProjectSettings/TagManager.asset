@@ -7,6 +7,10 @@ TagManager:
   - Enemy
   - Grid
   - HealthBar
+  - Quest
+  - Quest NPC
+  - Quest Enemy
+  - Quest Boxes
   layers:
   - Default
   - TransparentFX

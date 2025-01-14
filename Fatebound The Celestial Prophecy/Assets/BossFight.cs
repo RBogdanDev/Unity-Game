@@ -7,7 +7,7 @@ public class BossFight : Enemy
 {
     private float SecondPhase = 100; // Pragul la care bossul devine mai agresiv
     private bool isRaging;
-    
+    private Animator animator;
     new void Start()
     {
         base.Start();
