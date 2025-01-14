@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         animator=GetComponent<Animator>();
-        animator.Play("idle");
+        animator.SetTrigger("idle_1");
         audioSource=GetComponent<AudioSource>();
 
         enemytype = GetComponent<Enemy>();
@@ -78,12 +78,12 @@ public class EnemyAI : MonoBehaviour
               scale.x = Mathf.Abs(scale.x); // Ne asigurăm că direcția pe X este pozitivă
               this.transform.localScale = scale;
         }
-            animator.SetBool("isRunning",true);
+            animator.SetTrigger("run");
             transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, movement * Time.deltaTime);
         }
         if(distance >= deptofview){
             aggressive = false;
-            animator.SetBool("isRunning",false);
+            animator.SetTrigger("idle_1");
         }
         }
         else{

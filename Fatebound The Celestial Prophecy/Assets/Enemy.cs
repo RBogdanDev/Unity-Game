@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour, IDamageable
             if (damageable != null)
             {
 
-                animator.SetTrigger("jumpAttack");
+                animator.SetTrigger("skill_1");
                 damageable.TakeDamage(attack, AttackPoint.transform.position);
             }
         }
@@ -133,10 +133,10 @@ public class Enemy : MonoBehaviour, IDamageable
                 Debug.Log("It ain't over 'till I say it's over");
             }
             else{
-                animator.Play("Die_spike");
+                animator.Play("death");
             }
         }
-        animator.SetTrigger("isHurt");
+        animator.SetTrigger("hit_1");
         // Verificam daca damage-ul primit de la inamic este unul care poate fi intrerupt
         if (damage.Interrupts || isInterruptible)
         {
@@ -175,7 +175,7 @@ public class Enemy : MonoBehaviour, IDamageable
                         {
                             Debug.Log("Stuned");
                             IsStaggered = true;
-                            animator.Play("Specialhurt_spike");
+                            animator.Play("hit_2");
                         }
                     }
                     else
@@ -210,7 +210,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
             if (health <= 0)
             {
-                animator.Play("Die_spike");
+                animator.Play("death");
             }
             else if (IsStaggered)
             {
